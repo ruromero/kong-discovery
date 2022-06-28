@@ -1,2 +1,4 @@
 resources:
 - application.yaml
+- namespace.yaml
+- tls-generator.yaml

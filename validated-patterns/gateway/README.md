@@ -136,7 +136,6 @@ Create the license secret in kong namespace ( **for now**, we will use Vault in 
 oc create secret generic kong-enterprise-license -n kong --from-file=license=license.json
 ```
 
-
 In this section, we deployed:
 - Customized Argo Instance with Plugins
 - kong namespace

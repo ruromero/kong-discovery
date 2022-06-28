@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0" # for the next steps
+  name: prereqs
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    directory:
+      recurse: true
+    path: validated-patterns/gateway/prereqs
+    repoURL: https://github.com/cmwylie19/kong-discovery.git
+    targetRevision: design-concept # branch
+  syncPolicy:
+    automated: # automatically sync repo changes
+      prune: true
+      selfHeal: true

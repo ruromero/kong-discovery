@@ -1,0 +1,4 @@
+resources:
+  - prereqs/application.yaml
+  - controlplane
+  - dataplane

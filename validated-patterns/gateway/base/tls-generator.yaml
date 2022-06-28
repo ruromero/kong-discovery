@@ -2,7 +2,8 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
   name: system:openshift:scc:anyuid
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -17,12 +18,16 @@ kind: ServiceAccount
 metadata:
   name: kong
   namespace: kong
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: access-secrets
   namespace: kong
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 rules:
   - verbs:
       - get
@@ -39,7 +44,8 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: kong-to-secrets
-  namespace: kong
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 subjects:
   - kind: ServiceAccount
     name: kong
@@ -53,7 +59,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: cert-secret
-  namespace: kong
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   backoffLimit: 1
   template:
